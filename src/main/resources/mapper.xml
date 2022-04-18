@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.example.demo.dao.UserMapper">
+    
+ <resultMap type="com.example.demo.model.Mobile" id="result">
+    
+    <result column="id" property="id"/>
+    <result column="brand" property="brand"/>
+    <result column="modelno" property="modelno"/>
+    <result column="ram" property="ram"/>
+    <result column="phonememory" property="phonememory"/>
+        <result column="processor" property="processor"/>
+        <result column="price" property="price"/>
+    
+    </resultMap>
+    
+    
+
+<select id = "findAll" resultMap = "result">
+   SELECT * from mobile
+</select>
+
+
+<insert id = "insert" >
+   INSERT INTO Mobile (id, brand, modelno, ram, phonememory,processor,price ) 
+   VALUES (#{id}, #{brand}, #{modelno}, #{ram}, #{phonememory},#{processor},#{price});    
+</insert>
+
+
+<update id = "update" >
+
+   UPDATE Mobile SET modelno = #{modelno}, brand = #{brand}, ram = #{ram} WHERE id = #{id};
+</update>
+
+
+<delete id="delete" parameterType="int">
+        DELETE FROM mobile
+        WHERE id = #{id}
+    </delete>
+
+<select id = "getById" parameterType = "int" resultMap = "result">
+   SELECT * FROM Mobile WHERE ID = #{id};
+</select>
+
+<select id ="comparebyid" parameterType ="String" resultMap="result">
+
+
+SELECT *
+FROM "Sangeetha".mobile m 
+ORDER BY id;
+</select>
+
+<select id = "getBybrand" resultMap = "result">
+SELECT  *
+FROM "Sangeetha".mobile where brand =#{brand1};
+</select>
+ <update id='updateUser' >
+   UPDATE "Sangeetha".mobile
+SET brand=#{brand1}
+WHERE id=#{id1};
+
+  </update>
+
+
+<select id="getByprice"  resultMap = "result">
+SELECT id, brand, modelno, ram, phonememory, processor, price
+FROM "Sangeetha".mobile  WHERE price <![CDATA[ <= 10000 ]]>
+</select>
+
+
+
+</mapper>
+
+
+   
